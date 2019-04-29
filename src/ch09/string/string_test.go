@@ -19,14 +19,25 @@ func TestString(t *testing.T) {
 	* UTF8 是Unicode的一种存储实现（转换为字节序列列的规则）
 	 */
 	s = "中"
-	t.Log(len(s)) // 是byte数
+	t.Logf("%s string/[]byte  的byte数 %d, %x", s, len(s), s) // 是byte数
 
 	// type rune = int32
 	// It is used, by convention, to distinguish character values from integer values.
 	c := []rune(s)
-	t.Log(len(c))
+	t.Logf("unicode len: %d", len(c))
 	t.Logf("%x, %b", c, c)
 	t.Log(c)                     // 十进制
 	t.Logf("中 unicode %x", c[0]) // 十六进制
-	t.Logf("中 UTF8 %x", s)       // 十六进制
+	// %#x %#X  --> 0x  0X 前缀
+	// %#[n]x  n是占位符，用第n个操作数（从1开始）
+	t.Logf("中 UTF8 %x, %#[1]x", s)       // 十六进制
+}
+
+func TestStringToRune(t *testing.T) {
+	s := "中华人民共和国"
+	for _, c := range s {
+		t.Logf("%[1]c %[1]d", c)
+	}
+	// 但是%之后的[1]副词是占位符，告诉Logf函数使用第几个操作数（从1开始）
+	t.Logf("%[2]d %[1]d", 22, 11)
 }
