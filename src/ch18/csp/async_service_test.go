@@ -8,13 +8,13 @@ import (
 
 func service() string {
 	time.Sleep(time.Millisecond * 50)
-	return "Done"
+	return "Done (service)"
 }
 
 func otherTask() {
-	fmt.Println("working on something else")
+	fmt.Println("working on something else (otherTask)")
 	time.Sleep(time.Millisecond * 100)
-	fmt.Println("Task is done.")
+	fmt.Println("Task is done. (otherTask)")
 }
 
 func TestService(t *testing.T) {
@@ -34,11 +34,11 @@ func AsyncService() chan string {
 
 	go func() {
 		ret := service()
-		fmt.Println("returned result.")
+		fmt.Println("returned result. (AsyncService)")
 		// write to chan retCh
 		// 非buffer chan的阻塞处
 		retCh <- ret
-		fmt.Println("service exited.")
+		fmt.Println("service exited. (AsyncService)")
 	}()
 
 	return retCh
