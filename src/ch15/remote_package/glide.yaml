@@ -1,0 +1,5 @@
+package: github.com/seerjk/go_learning_geektime/src/ch15/remote_package
+import: []
+testImport:
+- package: github.com/easierway/concurrent_map
+  version: 0.9.1
